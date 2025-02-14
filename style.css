@@ -1,0 +1,225 @@
+html, body {
+    overflow: hidden; /* Nonaktifkan scroll */
+    height: 100%;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4b0;
+    text-align: center;
+    background: linear-gradient(45deg, #ff9e9e, #a2d8d8, #ffec7f, #f5a5e0, #7ac8c8, #ffb3b3);
+    background-size: 400% 400%;
+    animation: gradientAnimation 8s ease infinite;
+    transform: scale(0.8); /* Mengecilkan tampilan menjadi 75% */
+    transform-origin: center; /* Memastikan zoom-out berpusat di tengah */
+}
+
+@keyframes gradientAnimation {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+.login-container, .dashboard-container {
+    background: #ffffff59;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 300px;
+    margin: auto;
+}
+
+input {
+    width: 90%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+button {
+    padding: 10px;
+    background: #007BFF;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button:hover {
+    background: #0056b3;
+}
+
+#error-message {
+    color: red;
+    margin-top: 10px;
+}
+
+.password-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.password-container input {
+    width: 100%;
+    padding-right: 40px; /* Beri ruang untuk ikon */
+}
+
+.password-container i {
+    position: absolute;
+    right: 10px;
+    cursor: pointer;
+    color: #888;
+}
+
+.password-container i:hover {
+    color: #000;
+}
+
+/* Style untuk input field dengan ikon */
+.input-container {
+    position: relative;
+    width: 100%;
+    display: flex;
+    align-items: center;
+}
+
+.input-container input {
+    width: 100%;
+    padding: 10px 40px 10px 35px; /* Tambahkan padding kiri & kanan */
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+/* Style untuk ikon user & password */
+.input-container .icon-user,
+.input-container .icon-password {
+    position: absolute;
+    left: 10px;
+    font-size: 18px;
+    color: #888;
+}
+
+/* Style untuk ikon mata (show/hide password) */
+#togglePassword {
+    position: absolute;
+    right: 10px;
+    cursor: pointer;
+    font-size: 18px;
+    color: #888;
+}
+
+/* Style untuk Captcha */
+.captcha-container {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+#captcha-text {
+    font-size: 20px;
+    font-family: monospace;
+    font-weight: bold;
+    font-style: italic;
+    letter-spacing: 3px;
+    background-color: #e7e7e7;
+    padding: 7px 20px;
+    border-radius: 5px;
+    user-select: none;
+    margin-right: 9px;
+    width: 130px;
+    color: #999999;
+}
+
+#refreshCaptcha {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 20px;
+    color: #007bff;
+}
+
+#refreshCaptcha:hover {
+    color: #0056b3;
+}
+
+/* Container untuk tombol Login */
+.login-button-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+/* Styling tombol Login */
+#loginButton {
+    background-color: #28a745;
+    color: white;
+    padding: 10px 130px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.3s;
+    margin-top: -11px;
+}
+
+#loginButton:hover {
+    background-color: #218838;
+    transform: translateY(-2px); /* Efek hover */
+}
+
+#loginButton:active {
+    background-color: #1e7e34;
+    transform: translateY(0); /* Efek saat tombol ditekan */
+}
+
+/* Login Icon Styling */
+.login-icon-img {
+    width: 110px;
+    height: 110px;
+    transition: transform 0.3s ease;
+}
+
+.login-icon-img:hover {
+    transform: scale(1.2);
+    -webkit-transform: scale(1.2);
+    -moz-transform: scale(1.2);
+    -ms-transform: scale(1.2);
+    -o-transform: scale(1.2);
+}
+
+/* Styling untuk h2 */
+h2 {
+    font-family: 'Arial', sans-serif;
+    color: #3a3a3a; /* Warna teks */
+    font-size: 16px;
+    font-weight: bold;
+    margin: 5px 0; /* Jarak antar h2 */
+    text-transform: uppercase; /* Membuat teks kapital */
+    letter-spacing: 2px; /* Jarak antar huruf */
+}
+
+/* Efek hover untuk h2 */
+h2:hover {
+    color: #959595; /* Mengubah warna saat hover */
+    transform: translateY(-3px); /* Memberikan efek sedikit naik */
+    transition: color 0.3s, transform 0.3s; /* Animasi saat hover */
+}
+
+:root {
+    --swal2-backdrop: transparent !important;
+}
+
+.swal2-popup {
+    width: 20em !important; /* Perkecil ukuran notifikasi */
+    padding: 1.25em !important; /* Kurangi padding agar lebih kecil */
+    font-size: 0.8em !important; /* Perkecil ukuran font */
+}

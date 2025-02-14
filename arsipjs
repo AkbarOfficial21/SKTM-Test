@@ -1,0 +1,92 @@
+const users = {
+    "admin@slr-ds.mail.com": { password: "admin86123456", role: "Admin" },
+    "cireundeu@slr-ds.mail.com": { password: "crd86123456", role: "Desa Cireundeu" },
+    "cikuya@slr-ds.mail.com": { password: "cky86123456", role: "Desa Cikuya" },
+    "cikareo@slr-ds.mail.com": { password: "ckr86123456", role: "Desa Cikareo" },
+    "cikasungka@slr-ds.mail.com": { password: "cks86123456", role: "Desa Cikasungka" },
+    "pasanggrahan@slr-ds.mail.com": { password: "psg86123456", role: "Desa Pasanggrahan" },
+    "solear@slr-ds.mail.com": { password: "slr86123456", role: "Desa Solear" },
+    "munjul@slr-ds.mail.com": { password: "slr86123456", role: "Desa Munjul" }
+};
+
+// Fungsi untuk menangani login
+document.addEventListener("DOMContentLoaded", function () {
+    const loginForm = document.getElementById("loginForm");
+    if (loginForm) {
+        loginForm.addEventListener("submit", function (event) {
+            event.preventDefault();
+            const email = document.getElementById("email").value;
+            const password = document.getElementById("password").value;
+
+            if (users[email] && users[email].password === password) {
+                localStorage.setItem("loggedInUser", email);
+                sessionStorage.setItem("isLoggedIn", "true");
+
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Login Berhasil!',
+                    text: `Selamat datang, ${users[email].role}`,
+                    showConfirmButton: false,
+                    timer: 1500
+                }).then(() => {
+                    window.location.href = "dashboard.html";
+                });
+            } else {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Login Gagal!',
+                    text: 'Email atau Password salah!',
+                    confirmButtonText: 'Coba Lagi'
+                });
+            }
+        });
+    }
+
+    // Cek apakah pengguna memiliki sesi login di halaman dashboard
+    const welcomeMessage = document.getElementById("welcome-message");
+    if (welcomeMessage) {
+        const userEmail = localStorage.getItem("loggedInUser");
+        const isLoggedIn = sessionStorage.getItem("isLoggedIn");
+
+        if (userEmail && users[userEmail] && isLoggedIn === "true") {
+            welcomeMessage.textContent = `Selamat datang, ${users[userEmail].role}`;
+        } else {
+            window.location.href = "index.html"; // Paksa kembali ke login jika tidak ada sesi
+        }
+    }
+});
+
+// Fungsi untuk menampilkan/menghilangkan password
+document.addEventListener("DOMContentLoaded", function () {
+    const togglePassword = document.getElementById("togglePassword");
+    const passwordInput = document.getElementById("password");
+
+    if (togglePassword) {
+        togglePassword.addEventListener("click", function () {
+            if (passwordInput.type === "password") {
+                passwordInput.type = "text";
+                togglePassword.classList.remove("fa-eye");
+                togglePassword.classList.add("fa-eye-slash");
+            } else {
+                passwordInput.type = "password";
+                togglePassword.classList.remove("fa-eye-slash");
+                togglePassword.classList.add("fa-eye");
+            }
+        });
+    }
+});
+
+// Fungsi logout
+function logout() {
+    localStorage.removeItem("loggedInUser");
+    sessionStorage.removeItem("isLoggedIn"); // Hapus sesi login
+    window.location.href = "index.html";
+}
+
+// Cegah pengguna kembali ke dashboard setelah logout
+window.addEventListener("pageshow", function (event) {
+    if (event.persisted) {
+        sessionStorage.removeItem("isLoggedIn");
+        window.location.href = "index.html";
+    }
+});

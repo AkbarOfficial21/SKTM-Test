@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="id">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Login</title>
+        <link rel="stylesheet" href="style.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    </head>    
+    <body>
+        <div class="login-container">
+            <div class="login-icon">
+                <img src="logo pemas.png" alt="Login Icon" class="login-icon-img">
+            </div>
+            <h2>PEMBERDAYAAN MASYARAKAT</h2>
+            <h2>KECAMATAN SOLEAR</h2>
+            <form id="loginForm">
+                <div class="input-container">
+                    <i class="fa-solid fa-user icon-user"></i>
+                    <input type="email" id="email" placeholder="Email" required>
+                </div>
+                <div class="input-container">
+                    <i class="fa-solid fa-key icon-password"></i>
+                    <input type="password" id="password" placeholder="Password" required>
+                    <i class="fa fa-eye" id="togglePassword"></i>
+                </div>
+    
+                <!-- Captcha Section -->
+                <div class="captcha-container">
+                    <span id="captcha-text"></span>
+                    <input type="text" id="captchaInput" placeholder="Masukkan Captcha" required>
+                    <button type="button" id="refreshCaptcha">
+                        <i class="fa fa-sync-alt"></i>
+                    </button>
+                </div>
+
+                <!-- Login Button -->
+                <div class="login-button-container">
+                    <button type="submit" id="loginButton">Login</button>
+                </div>
+            </form>
+            <p id="error-message"></p>
+        </div>
+        <script src="script.js"></script>
+    </body>    
+</html>
