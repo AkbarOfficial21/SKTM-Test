@@ -1,17 +1,286 @@
 <!DOCTYPE html>
-<html lang="id">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard</title>
-    <link rel="stylesheet" href="style.css">
+    <title>Web dengan Sidebar dan Navbar</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            position: relative;
+            flex-direction: column;
+            background-color: #f1f8fb;
+        }
+
+        /* Navbar Style */
+        #navbar {
+            background-color: #4CAF50;
+            padding: 15px;
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1;
+            transition: left 0.3s ease-in-out;
+        }
+
+        #navbar h1 {
+            font-size: 20px;
+            font-weight: 600;
+        }
+
+        #navbar button {
+            background-color: #3e8e41;
+            border: none;
+            color: white;
+            padding: 5px 10px;
+            font-size: 20px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        #navbar button:hover {
+            background-color: #45a049;
+        }
+
+        /* Sidebar Style */
+        #sidebar {
+            height: 100%;
+            width: 250px;
+            background-color: #81C784;
+            position: fixed;
+            top: 0;
+            left: -250px;
+            padding-top: 60px;
+            color: white;
+            border-radius: 0 0px 10px 0;
+            transition: left 0.3s ease-in-out;
+        }
+
+        #sidebar.active {
+            left: 0;
+        }
+
+        .sidebar-header {
+            text-align: center;
+            margin-bottom: 10px; /* Mengurangi margin bawah */
+        }
+
+        .sidebar-header h3 {
+            font-size: 22px;
+            color: #ffffff;
+        }
+
+        /* Profile Info in Sidebar */
+        .profile-info {
+            display: flex;
+            align-items: center;
+            justify-content: flex-start; /* Membuat profil berada di kiri */
+            margin-bottom: 10px; /* Mengurangi margin bawah untuk menggeser ke atas */
+            padding: 10px 20px; /* Menambahkan padding agar tidak terlalu rapat */
+            margin-top: -58px;
+        }
+
+        .profile-info img {
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            margin-right: 10px;
+        }
+
+        .profile-info .details {
+            color: white;
+            text-align: left; /* Teks rata kiri */
+        }
+
+        .profile-info .details h4 {
+            font-size: 14px; /* Ukuran font lebih kecil */
+            margin: 5px 0;
+        }
+
+        .profile-info .details p {
+            font-size: 12px; /* Ukuran font lebih kecil */
+        }
+
+        .sidebar-menu li {
+            padding: 10px;
+            text-align: center;
+        }
+
+        .sidebar-menu li a {
+            display: block;
+            background-color: #4CAF50;
+            color: white;
+            text-decoration: none;
+            padding: 12px 0;
+            border-radius: 5px;
+        }
+
+        .sidebar-menu li a:hover {
+            background-color: #388E3C;
+        }
+
+        .sidebar-menu {
+            list-style-type: none;
+            padding-left: 0;
+        }
+
+        .sidebar-menu li {
+            padding: 10px;
+            text-align: center;
+        }
+
+        .sidebar-menu li button {
+            width: 100%;
+            background-color: #4CAF50;
+            border: none;
+            color: white;
+            padding: 12px 0;
+            cursor: pointer;
+            font-size: 16px;
+            border-radius: 5px;
+        }
+
+        .sidebar-menu li button:hover {
+            background-color: #388E3C;
+        }
+
+        .sidebar-footer {
+            position: absolute;
+            bottom: 20px;
+            width: 100%;
+            text-align: center;
+            font-size: 14px;
+            color: #ffffff;
+        }
+
+        /* Main Content */
+        #content {
+            margin-left: 0;
+            padding: 20px;
+            width: 100%;
+            margin-top: 60px;
+            color: #333;
+        }
+
+        h2 {
+            color: #4CAF50;
+            transition: left 0.3s ease-in-out;
+        }
+
+        p {
+            font-size: 18px;
+            transition: left 0.3s ease-in-out;
+        }
+
+        .sidebar-active {
+            transition: left 0.3s ease;
+        }
+        
+    </style>
 </head>
 <body>
-    <div class="dashboard-container">
-        <h2>Dashboard</h2>
-        <p id="welcome-message"></p>
-        <button onclick="logout()">Logout</button>
+
+    <!-- Navbar -->
+    <div id="navbar">
+        <button id="toggleBtn" onclick="toggleSidebar()">&#9776;</button>
+        <h1>Website dengan Sidebar</h1>
     </div>
-    <script src="script.js"></script>
+
+    <!-- Sidebar -->
+    <div id="sidebar" class="sidebar">
+        <div class="sidebar-header">
+            <div class="profile-info">
+                <img src="logo pemas.png" alt="Foto Profil">
+                <div class="details">
+                    <h4>Nama User</h4>
+                    <p>Status: Admin</p>
+                </div>
+            </div>
+        </div>
+        <ul class="sidebar-menu">
+            <li><a href="#" onclick="openSection('dashboard')">Dashboard</a></li>
+            <li><a href="#" onclick="openSection('pengajuan')">Pengajuan SKTM</a></li>
+            <li><a href="#" onclick="openSection('akun')">Detail Akun</a></li>
+            <li><a href="index.html" onclick="return confirmLogout()">Log Out</a></li>
+        </ul>
+        <div class="sidebar-footer">
+            <p>Versi 1.0</p>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div id="content">
+        <h2>Selamat datang!</h2>
+        <p>Pilih menu dari sidebar untuk melihat informasi lebih lanjut.</p>
+    </div>
+
+    <script>
+        // Function to toggle sidebar visibility and move navbar button
+        function toggleSidebar() {
+            const sidebar = document.getElementById('sidebar');
+            const navbar = document.getElementById('navbar');
+            const toggleBtn = document.getElementById('toggleBtn');
+            
+            sidebar.classList.toggle('active');
+            navbar.style.left = sidebar.classList.contains('active') ? '250px' : '0';
+            toggleBtn.style.left = sidebar.classList.contains('active') ? '0' : '250px';
+
+            const content = document.getElementById('content');
+            content.style.marginLeft = sidebar.classList.contains('active') ? '250px' : '0';
+
+            // Save sidebar state to localStorage
+            localStorage.setItem('sidebarActive', sidebar.classList.contains('active'));
+
+            // Apply animation only if sidebar is toggled by user
+            if (sidebar.classList.contains('active')) {
+                sidebar.classList.add('sidebar-active');
+            } else {
+                sidebar.classList.remove('sidebar-active');
+            }
+        }
+
+        // Function to display content based on menu clicked
+        function openSection(section) {
+            const content = document.getElementById('content');
+            if (section === 'akun') {
+                content.innerHTML = "<h2>Info Akun</h2><p>Ini adalah informasi akun Anda.</p>";
+            } else if (section === 'dashboard') {
+                content.innerHTML = "<h2>Dashboard</h2><p>Ini adalah halaman dashboard.</p>";
+            } else if (section === 'pengajuan') {
+                content.innerHTML = "<h2>Pengajuan SKTM</h2><p>Ini adalah halaman pengajuan SKTM.</p>";
+            }
+        }
+
+        // Function for logout action
+        function logout() {
+            alert("Anda telah keluar.");
+        }
+
+        // Check sidebar state on page load
+        window.onload = function() {
+            const sidebarState = localStorage.getItem('sidebarActive');
+            const sidebar = document.getElementById('sidebar');
+            
+            if (sidebarState === 'true') {
+                sidebar.classList.add('active');
+                document.getElementById('navbar').style.left = '250px';
+                document.getElementById('toggleBtn').style.left = '0';
+                document.getElementById('content').style.marginLeft = '250px';
+            }
+        }
+    </script>
+
 </body>
 </html>
