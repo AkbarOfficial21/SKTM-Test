@@ -224,3 +224,26 @@ h2:hover {
     padding: 1.25em !important; /* Kurangi padding agar lebih kecil */
     font-size: 0.8em !important; /* Perkecil ukuran font */
 }
+
+@media (max-width: 768px) {
+    .login-container, .dashboard-container {
+        width: 95%;
+        max-width: 300px;
+    }
+    body {
+        padding: 20px;
+    }
+}
+
+@media (max-width: 480px) {
+    .login-container, .dashboard-container {
+        width: 100%;
+        max-width: 280px;
+        padding: 15px;
+    }
+    #captcha-text {
+        font-size: 16px;
+        padding: 5px 15px;
+    }
+}
+
