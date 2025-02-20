@@ -309,6 +309,35 @@
 
     <!-- JavaScript -->
     <script>
+
+        let inactivityTimer;
+
+        // Fungsi Reset Timer
+        function resetInactivityTimer() {
+            clearTimeout(inactivityTimer);
+            inactivityTimer = setTimeout(autoLogout, 3600000);
+        }
+
+        // Auto Logout
+        function autoLogout() {
+            Swal.fire({
+                title: 'Auto Logout',
+                text: 'Anda telah logout karena tidak ada aktivitas selama 60 menit.',
+                icon: 'warning',
+                confirmButtonText: 'OK'
+            }).then(() => {
+                localStorage.removeItem("loggedInUser");
+                window.location.href = "index.html";
+            });
+        }
+
+        // Event Listener Aktivitas
+        window.onload = resetInactivityTimer;
+        document.onmousemove = resetInactivityTimer;
+        document.onkeydown = resetInactivityTimer;
+        document.onclick = resetInactivityTimer;
+        document.onscroll = resetInactivityTimer;
+        
         // Toggle Sidebar
         function toggleSidebar() {
             const sidebar = document.getElementById('sidebar');
